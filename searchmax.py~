@@ -1,0 +1,61 @@
+__author__ = 'ArseneLupin'
+
+def micAn(arraydat):
+
+    datAr = []
+    chestData=[]
+    waistData=[]
+    thighData=[]
+
+    chestAfter=[]
+    waistAfter=[]
+    thighAfter=[]
+
+    for arr in arraydat:
+        chesttemp = [arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6],arr[7]]
+        chestData.append(chesttemp)
+        thightemp = [arr[8],arr[9],arr[10],arr[11],arr[12],arr[13],arr[14],arr[15]]
+        thighData.append(thightemp)
+
+        #waisttemp = [arr[16],arr[17],arr[18],arr[19],arr[20],arr[21],arr[22],arr[23]]
+        #waistData.append(waisttemp)
+
+    chestAfter = searchmax(chestData)
+    thighAfter = searchmax(thighData)
+    #waistAfter = searchmax(waistData)
+
+
+    for x in range (len(arraydat)):
+
+        tempAr = [chestAfter[x], thighAfter[x]]
+        datAr.append(tempAr)
+
+    return datAr
+
+def searchmax(datval):
+
+    arrsize = len(datval)
+    maxIndex = 0
+    initVal = datval[0];
+    maxValue = initVal[6]
+
+    for n in range(arrsize):
+
+        tempVal = datval[n]
+
+        if tempVal[6]>maxValue:
+            maxValue = tempVal[6]
+            maxIndex = n
+
+    for i in range(arrsize):
+
+        datdat = datval[i]
+
+        if i == maxIndex:
+            datdat.append(2)
+        else:
+            datdat.append(0)
+
+        datval.append(datdat)
+
+    return datval
