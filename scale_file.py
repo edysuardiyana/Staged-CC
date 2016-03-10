@@ -42,32 +42,32 @@ def scale_row(raw_data):
     data = ARRAY_TUPLED(*[float(x) for x in raw_data])
     #==============================================================
     #Chest Accel Data
-    xChestA = ascale.ascale(data.AXC, CHEST_INDEX, 1)
-    yChestA = ascale.ascale(data.AYC, CHEST_INDEX, 2)
-    zChestA = ascale.ascale(data.AZC, CHEST_INDEX, 3)
+    #xChestA = ascale.ascale(data.AXC, CHEST_INDEX, 1)
+    #yChestA = ascale.ascale(data.AYC, CHEST_INDEX, 2)
+    #zChestA = ascale.ascale(data.AZC, CHEST_INDEX, 3)
 
     #Chest Gyro Data
-    xChestG = gscale.gscale(data.GXC, REFF_GYRO_SET[0])
-    yChestG = gscale.gscale(data.GYC, REFF_GYRO_SET[1])
-    zChestG = gscale.gscale(data.GZC, REFF_GYRO_SET[2])
+    #xChestG = gscale.gscale(data.GXC, REFF_GYRO_SET[0])
+    #yChestG = gscale.gscale(data.GYC, REFF_GYRO_SET[1])
+    #zChestG = gscale.gscale(data.GZC, REFF_GYRO_SET[2])
 
-    cavm = l2norm(xChestA, yChestA, zChestA)
-    cgvm = l2norm(xChestG, yChestG, zChestG)
+    #cavm = l2norm(xChestA, yChestA, zChestA)
+    #cgvm = l2norm(xChestG, yChestG, zChestG)
     #==============================================================
 
     #Future Work
     #Waist Accel Data
-    #xWaistA = ascale.ascale(float(data[9]), WAIST_INDEX, 1)
-    #yWaistA = ascale.ascale(float(data[10]), WAIST_INDEX, 2)
-    #zWaistA = ascale.ascale(float(data[11]), WAIST_INDEX, 3)
+    xWaistA = ascale.ascale(float(data[9]), WAIST_INDEX, 1)
+    yWaistA = ascale.ascale(float(data[10]), WAIST_INDEX, 2)
+    zWaistA = ascale.ascale(float(data[11]), WAIST_INDEX, 3)
 
     #Waist Gyro Data
-    #xWaistG = gscale.gscale(float(data[12]), REFF_GYRO_SET[3])
-    #yWaistG = gscale.gscale(float(data[13]), REFF_GYRO_SET[4])
-    #zWaistG = gscale.gscale(float(data[14]), REFF_GYRO_SET[5])
+    xWaistG = gscale.gscale(float(data[12]), REFF_GYRO_SET[3])
+    yWaistG = gscale.gscale(float(data[13]), REFF_GYRO_SET[4])
+    zWaistG = gscale.gscale(float(data[14]), REFF_GYRO_SET[5])
 
-    #wavm = math.sqrt(xWaistA * xWaistA + yWaistA * yWaistA + zWaistA * zWaistA)
-    #wgvm = math.sqrt(xWaistG * xWaistG + yWaistG * yWaistG + zWaistG * zWaistG)
+    wavm = l2norm(xWaistA, yWaistA, zWaistA)
+    wgvm = l2norm(xWaistG, yWaistG, zWaistG)
 
 
     #==============================================================
@@ -85,15 +85,19 @@ def scale_row(raw_data):
     tgvm = l2norm(xThighG, yThighG, zThighG)
     #==============================================================
 
-    anDat = data.ANNOT
+    an_dat = data.ANNOT
 
-    outputList = [xChestA, yChestA, zChestA, xChestG, yChestG, zChestG, cavm, cgvm, xThighA, yThighA, zThighA,
-                xThighG, yThighG, zThighG, tavm, tgvm, anDat]
+    # this code is for chest and thigh data
+    #output_list = [xChestA, yChestA, zChestA, xChestG, yChestG, zChestG, cavm, cgvm, xThighA, yThighA, zThighA,
+    #            xThighG, yThighG, zThighG, tavm, tgvm, anDat]
 
-    return outputList
+    output_list = [xWaistA,yWaistA, zWaistA, xWaistG, yWaistG, zWaistG, wavm, wgvm, xThighA, yThighA, zThighA,
+                xThighG, yThighG, zThighG, tavm, tgvm, an_dat]
+
+    return output_list
 
 
-    
+
 def scale_file(sourceFile, destFile, initcut, endcut):
 
 
@@ -122,7 +126,7 @@ def scale_file(sourceFile, destFile, initcut, endcut):
             if start_flag is True:
 
                 data = line.split()
-                
+
                 output_list = scale_row(data)
 
                 csvWriter.writerow(output_list)
@@ -148,4 +152,3 @@ def scale_file(sourceFile, destFile, initcut, endcut):
             #else:
                 #out = func(row)
                 #csv_writer.writerow(out)
-                

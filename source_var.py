@@ -24,6 +24,10 @@ def source_var():
     name_path = configParser("SectionOne")['source_list_name']
     return name_path
 
+def source_index():
+    index_path = configParser("SectionOne")['source_list_index']
+    return index_path
+
 def init_val():
     in_val = int(configParser("SectionOne")['initval'])
     return in_val
