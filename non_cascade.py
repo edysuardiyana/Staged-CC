@@ -1,5 +1,6 @@
 from collections import namedtuple
 import feature_extract
+import csv
 
 ARRAY_TUPLED = namedtuple('ARRAY_TUPLED', 'AXC AYC AZC GXC GYC GZC AVMC GVMC ANNOTCHEST'
                              ' AXT AYT AZT GXT GYT GZT AVMT GVMT ANNOTTHIGH')
@@ -30,8 +31,10 @@ def feat_extract(chest_array,freq_rate, features_path):
     out_file.close()
     return counter
 
-def run_feat_calc(freq_rate,path,features_path):
+def run_feat_calc(name,freq_rate,path,features_path):
     #main caller for feature extraction
+    indicator = "Extracting features value from " + name
+    print indicator
     chest_array = read_data(path)
     buffer_test = feat_extract(chest_array, freq_rate, features_path)
 
