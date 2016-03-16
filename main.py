@@ -11,10 +11,11 @@ import non_cascade
 
 def main():
     list_name = read_subject_name(source_var.source_var())
-    cutting_index_list = read_cutting_index(source_var.source_index())
+    #cutting_index_list = read_cutting_index(source_var.source_index())
+    print len(list_name)
     for i in range(len(list_name)):
         name = list_name[i]
-        indexes = cutting_index_list[i]
+        #indexes = cutting_index_list[i]
         print "Processing data from :"
         print name
 
@@ -27,11 +28,11 @@ def main():
         source_runtime = source_var.source_runtime(name)
 
         #scale_file.scale_file(source_raw_data, source_file_micro, indexes[0], indexes[1])
-        microannotate_right.micro_annotate(source_file_micro, micro_path) # re-annotate the raw data using micro-annotate
+        #microannotate_right.micro_annotate(source_file_micro, micro_path) # re-annotate the raw data using micro-annotate
         #cascade_with_rule.run_cascade(freq_rate,micro_path,features_path,source_runtime)
         #cascade_long_win.run_cascade (freq_rate,micro_path,features_path)
-        non_cascade.run_feat_calc(name, freq_rate,micro_path,features_path)
-        weka_file.write_weka(features_path, source_weka) # create the weka file
+        #non_cascade.run_feat_calc(name, freq_rate,micro_path,features_path)
+        #weka_file.write_weka(features_path, source_weka) # create the weka file
 
     mainTrainingGenerator.generate_training()
 

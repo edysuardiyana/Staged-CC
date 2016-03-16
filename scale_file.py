@@ -42,17 +42,17 @@ def scale_row(raw_data):
     data = ARRAY_TUPLED(*[float(x) for x in raw_data])
     #==============================================================
     #Chest Accel Data
-    #xChestA = ascale.ascale(data.AXC, CHEST_INDEX, 1)
-    #yChestA = ascale.ascale(data.AYC, CHEST_INDEX, 2)
-    #zChestA = ascale.ascale(data.AZC, CHEST_INDEX, 3)
+    xChestA = ascale.ascale(data.AXC, CHEST_INDEX, 1)
+    yChestA = ascale.ascale(data.AYC, CHEST_INDEX, 2)
+    zChestA = ascale.ascale(data.AZC, CHEST_INDEX, 3)
 
     #Chest Gyro Data
-    #xChestG = gscale.gscale(data.GXC, REFF_GYRO_SET[0])
-    #yChestG = gscale.gscale(data.GYC, REFF_GYRO_SET[1])
-    #zChestG = gscale.gscale(data.GZC, REFF_GYRO_SET[2])
+    xChestG = gscale.gscale(data.GXC, REFF_GYRO_SET[0])
+    yChestG = gscale.gscale(data.GYC, REFF_GYRO_SET[1])
+    zChestG = gscale.gscale(data.GZC, REFF_GYRO_SET[2])
 
-    #cavm = l2norm(xChestA, yChestA, zChestA)
-    #cgvm = l2norm(xChestG, yChestG, zChestG)
+    cavm = l2norm(xChestA, yChestA, zChestA)
+    cgvm = l2norm(xChestG, yChestG, zChestG)
     #==============================================================
 
     #Future Work
@@ -88,11 +88,11 @@ def scale_row(raw_data):
     an_dat = data.ANNOT
 
     # this code is for chest and thigh data
-    #output_list = [xChestA, yChestA, zChestA, xChestG, yChestG, zChestG, cavm, cgvm, xThighA, yThighA, zThighA,
-    #            xThighG, yThighG, zThighG, tavm, tgvm, anDat]
-
-    output_list = [xWaistA,yWaistA, zWaistA, xWaistG, yWaistG, zWaistG, wavm, wgvm, xThighA, yThighA, zThighA,
+    output_list = [xChestA, yChestA, zChestA, xChestG, yChestG, zChestG, cavm, cgvm, xThighA, yThighA, zThighA,
                 xThighG, yThighG, zThighG, tavm, tgvm, an_dat]
+
+    #output_list = [xWaistA,yWaistA, zWaistA, xWaistG, yWaistG, zWaistG, wavm, wgvm, xThighA, yThighA, zThighA,
+    #            xThighG, yThighG, zThighG, tavm, tgvm, an_dat]
 
     return output_list
 
