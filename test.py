@@ -1,9 +1,13 @@
 from difflib import SequenceMatcher
 import operator
 import timeit
+y = []
+z = []
+x = [1,2,3,4,5]
 
-x = []
-for i in range(10,40):
-    x.append(i)
+for i in x:
+    y.append(x[:len(x)-1])
+    z.append(x[4])
 
-print len(x)
+print y
+print z
