@@ -29,9 +29,9 @@ def main():
 
         #scale_file.scale_file(source_raw_data, source_file_micro, indexes[0], indexes[1])
         microannotate_right.micro_annotate(source_file_micro, micro_path) # re-annotate the raw data using micro-annotate
-        cascade_with_rule.run_cascade(freq_rate,micro_path,features_path,source_runtime) # the latest cascade classifier
+        #cascade_with_rule.run_cascade(freq_rate,micro_path,features_path,source_runtime) # the latest cascade classifier
         #non_cascade.run_feat_calc(name, freq_rate,micro_path,features_path) # this function is for non-cascade processing
-        weka_file.write_weka(features_path, source_weka) # create the weka file
+        #weka_file.write_weka(features_path, source_weka) # create the weka file
 
     mainTrainingGenerator.generate_training()
 
