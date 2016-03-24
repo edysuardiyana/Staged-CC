@@ -88,11 +88,11 @@ def scale_row(raw_data):
     an_dat = data.ANNOT
 
     # this code is for chest and thigh data
-    output_list = [xChestA, yChestA, zChestA, xChestG, yChestG, zChestG, cavm, cgvm, xThighA, yThighA, zThighA,
-                xThighG, yThighG, zThighG, tavm, tgvm, an_dat]
-
-    #output_list = [xWaistA,yWaistA, zWaistA, xWaistG, yWaistG, zWaistG, wavm, wgvm, xThighA, yThighA, zThighA,
+    #output_list = [xChestA, yChestA, zChestA, xChestG, yChestG, zChestG, cavm, cgvm, xThighA, yThighA, zThighA,
     #            xThighG, yThighG, zThighG, tavm, tgvm, an_dat]
+
+    output_list = [xWaistA,yWaistA, zWaistA, xWaistG, yWaistG, zWaistG, wavm, wgvm, xThighA, yThighA, zThighA,
+                xThighG, yThighG, zThighG, tavm, tgvm, an_dat]
 
     return output_list
 
