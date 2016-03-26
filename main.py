@@ -12,7 +12,7 @@ import non_cascade
 def main():
     list_name = read_subject_name(source_var.source_var())
     cutting_index_list = read_cutting_index(source_var.source_index())
-    print len(list_name)
+    #print cutting_index_list
     for i in range(len(list_name)):
         name = list_name[i]
         indexes = cutting_index_list[i]
@@ -28,12 +28,12 @@ def main():
         source_runtime = source_var.source_runtime(name)
 
         scale_file.scale_file(source_raw_data, source_file_micro, indexes[0], indexes[1])
-        microannotate_right.micro_annotate(source_file_micro, micro_path) # re-annotate the raw data using micro-annotate
-        cascade_with_rule.run_cascade(freq_rate,micro_path,features_path,source_runtime) # the latest cascade classifier
+        #microannotate_right.micro_annotate(source_file_micro, micro_path) # re-annotate the raw data using micro-annotate
+        #cascade_with_rule.run_cascade(freq_rate,micro_path,features_path,source_runtime) # the latest cascade classifier
         #non_cascade.run_feat_calc(name, freq_rate,micro_path,features_path) # this function is for non-cascade processing
-        weka_file.write_weka(features_path, source_weka) # create the weka file
+        #weka_file.write_weka(features_path, source_weka) # create the weka file
 
-    mainTrainingGenerator.generate_training()
+    #mainTrainingGenerator.generate_training()
 
 
 def read_subject_name(source_path):
@@ -46,13 +46,13 @@ def read_subject_name(source_path):
 
 def read_cutting_index(source_path):
     index_list = []
-    new_indexes = [None]*2
+    new_indexes = []
     with open(source_path) as list_obj:
         for line in list_obj:
             indexes = line.split(",")
-            new_indexes[0] = float(indexes[0])
-            new_indexes[1] = float(indexes[1])
+            new_indexes = [float(x) for x in indexes[:len(indexes)]]
             index_list.append(new_indexes)
+    print index_list
     return index_list
 
 if __name__ == '__main__':

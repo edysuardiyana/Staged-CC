@@ -99,7 +99,9 @@ def scale_row(raw_data):
 
 
 def scale_file(sourceFile, destFile, initcut, endcut):
-
+    print sourceFile
+    print initcut
+    print endcut
 
     print("This Program is scaling your data now")
     print("Processing ....")
