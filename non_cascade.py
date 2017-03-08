@@ -2,8 +2,8 @@ from collections import namedtuple
 import feature_extract
 import csv
 
-ARRAY_TUPLED = namedtuple('ARRAY_TUPLED', 'AXC AYC AZC GXC GYC GZC AVMC GVMC ANNOTCHEST'
-                             ' AXT AYT AZT GXT GYT GZT AVMT GVMT ANNOTTHIGH')
+ARRAY_TUPLED = namedtuple('ARRAY_TUPLED', 'AXC AYC AZC GXC GYC GZC AVMC GVMC ANNOTCHEST ACTIVE_CHEST'
+                             ' AXT AYT AZT GXT GYT GZT AVMT GVMT ANNOTTHIGH ACTIVE_THIGH')
 
 def read_data(file_path):
     """ This functions read samples from file """
@@ -20,14 +20,15 @@ def read_data(file_path):
 def feat_extract(chest_array,freq_rate, features_path):
     #this function is for doing the feaqture extraction
     start_index = freq_rate
-    end_index = freq_rate * 4
+    end_index = freq_rate * 11
     out_file = open(features_path, "a")
     csv_writer = csv.writer(out_file, delimiter='\t')
     counter = 0
     for i in range(start_index, len(chest_array) - end_index):
-        features_value = feature_extract.calc_features(chest_array[i-freq_rate:i+end_index],chest_array[i].ANNOTCHEST,freq_rate)
-        csv_writer.writerow(features_value)
-        counter = counter + 1
+        if chest_array[i].ACTIVE_CHEST == 1:
+            features_value = feature_extract.calc_features(chest_array[i-freq_rate:i+end_index],chest_array[i].ANNOTCHEST,freq_rate)
+            csv_writer.writerow(features_value)
+            counter = counter + 1
     out_file.close()
     return counter
 

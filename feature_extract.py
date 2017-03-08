@@ -8,15 +8,18 @@ import emafit
 import csv
 import energyFeat
 import smaFeat
-
+import matplotlib.pyplot as plt
 
 def calc_features(fullarray,micannot,samp_rate):
 
     #vect_c not used
 
-    pre_win = [0,samp_rate] #pre-window
-    imp_win = [samp_rate,samp_rate*2] # impact window
-    post_win = [samp_rate*2, samp_rate*5] #post impact window
+    pre_win = [0,100] #pre-window 1s
+
+    impact_max = [50,150] #1s
+    imp_win = [50,650] # impact window 6s
+    post_win = [300, 1200] #9 s, based on the paper it should be 250-1200
+
 
     datAr = [] #for vector magnitude
     datXa= [] #for X values
@@ -37,25 +40,34 @@ def calc_features(fullarray,micannot,samp_rate):
         datYg.append(float(tempdata[4]))
         datZg.append(float(tempdata[5]))
 
+
+    #if micannot == 2:
+#        print "fall"
+    #else:
+    #    print "non-fall"
+    #plt.plot(datAr)
+    #plt.show()
+
+
     #******************************************************************************************************************************
     #minimum pre impact
     min_pre = min(datAr[pre_win[0]:pre_win[1]])
 
     #minimum value impact
-    min_imp = min(datAr[imp_win[0]:imp_win[1]])
+    #min_imp = min(datAr[imp_win[0]:imp_win[1]])
 
     #minimum post imp
-    min_post = min(datAr[post_win[0]:post_win[1]])
+    #min_post = min(datAr[post_win[0]:post_win[1]])
 
     #******************************************************************************************************************************
     #maximum value pre-impact
-    max_pre = max(datAr[pre_win[0]:pre_win[1]])
+    #max_pre = max(datAr[pre_win[0]:pre_win[1]])
 
     #maximum value impact
-    max_imp = max(datAr[imp_win[0]:imp_win[1]])
+    max_imp = max(datAr[impact_max[0]:impact_max[1]])
 
     #maximum value post
-    max_post = max(datAr[post_win[0]:post_win[1]])
+    #max_post = max(datAr[post_win[0]:post_win[1]])
     #******************************************************************************************************************************
     #mean for pre-impact event
     meanList1 = datAr[pre_win[0]:pre_win[1]]
@@ -144,7 +156,7 @@ def calc_features(fullarray,micannot,samp_rate):
 
     #******************************************************************************************************************************
 
-    datfeat = [min_pre,min_imp,min_post, max_pre, max_imp, max_post, meanVal1, meanVal2, meanVal3, rms1, rms2, rms3, variance1,
+    datfeat = [min_pre, max_imp, meanVal1, meanVal2, meanVal3, rms1, rms2, rms3, variance1,
     variance2, variance3, velo1,velo2, velo3, energy1, energy2, energy3, sma1, sma2, sma3, ewma1, ewma2, ewma3, micannot]
 
     return datfeat

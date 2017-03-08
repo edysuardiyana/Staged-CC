@@ -5,9 +5,15 @@ import operator
 import source_var
 import timeit
 
+
 THRESHOLD_VALUE = 1.6
-ARRAY_TUPLED = namedtuple('ARRAY_TUPLED', 'AXC AYC AZC GXC GYC GZC AVMC GVMC ANNOTCHEST'
-                             ' AXT AYT AZT GXT GYT GZT AVMT GVMT ANNOTTHIGH')
+ARRAY_TUPLED = namedtuple('ARRAY_TUPLED', 'AXC AYC AZC GXC GYC GZC AVMC GVMC ANNOT'
+                             ' AXT AYT AZT GXT GYT GZT AVMT GVMT ANNOTTHIGH') ##with micro annotation
+
+#ARRAY_TUPLED = namedtuple('ARRAY_TUPLED', 'AXC AYC AZC GXC GYC GZC AVMC GVMC'
+#                             ' AXT AYT AZT GXT GYT GZT AVMT GVMT ANNOT')
+
+
 
 #the first rule: the highest peak must be in the impact stage
 #the second rule: the act sample must be align with the highest peak from pre-impact and impact stage
@@ -30,7 +36,7 @@ def find_max(vect_array):
     for line in vect_array:
         vector_temp.append(line.AVMC)
     index, max_val = max(enumerate(vector_temp),key=operator.itemgetter(1))
-    micro_annot  = vect_array[index].ANNOTCHEST
+    micro_annot  = vect_array[index].ANNOT
     return index,max_val,micro_annot
 
 def rule_2_implementation(vect_array,max_value):

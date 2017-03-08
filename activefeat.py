@@ -10,9 +10,9 @@ CHEST_WIN = [0, 9]
 THIGH_WIN = [9, 18]
 #WAIST_WIN = [18, 27]
 
-def active_feat():
-    sourceFile = source_var.source_path_micro()
-    destFile = source_var.source_path_active()
+def active_feat(name):
+    sourceFile = source_var.source_path_micro(name)
+    destFile = source_var.source_path_active(name)
 
     chestArray=[]
     thighArray=[]
@@ -56,11 +56,3 @@ def active_feat():
         csvWriter.writerow(datfinal)
 
     outF.close()
-
-
-
-
-
-
-
-

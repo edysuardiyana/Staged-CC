@@ -5,7 +5,7 @@ import ConfigParser
 def configParser(section):
 
     Config = ConfigParser.ConfigParser()
-    Config.read('prop.ini')
+    Config.read('/Users/ArseneLupin/Documents/edy/falls_ver1.3/prop.ini')
     dict1 = {}
     options = Config.options(section)
     for option in options:
@@ -92,3 +92,16 @@ def source_runtime(name):
     path = configParser("SectionOne")['source_path_runtime']
     runtime = path + name + '.csv'
     return runtime
+
+def source_result(code_classifier):
+    if code_classifier == 0:
+        clf = "SVM"
+    elif code_classifier == 1:
+        clf = "DT"
+    elif code_classifier == 2:
+        clf = "KNN"
+    else:
+        clf = "LR"
+    path = configParser("SectionOne")['source_result']
+    result = path+clf+'.csv'
+    return result
